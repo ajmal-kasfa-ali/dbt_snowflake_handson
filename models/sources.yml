@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: demo # Logical name for your source
+    database: demo # Database where the source tables reside (optional, can be inherited from profile)
+    schema: demo_schema # Schema where the source tables reside
+
+    tables:
+      - name: bike # Logical name for the table
+      - name: weather
