@@ -1,15 +1,13 @@
-WITH TRIPS as (
+WITH BIKE as (
 
 select
-RIDE_ID,
-RIDEABLE_TYPE,
-DATE(TO_TIMESTAMP(REPLACE(STARTED_AT, '"', ''))) AS TRIP_DATE,
-START_STATIO_ID AS START_STATION_ID,
-END_STATION_ID,
-MEMBER_CSUAL AS MEMBER_CASUAL,
-TIMESTAMPDIFF(SECOND,TO_TIMESTAMP(REPLACE(STARTED_AT, '"', '')),TO_TIMESTAMP(REPLACE(ENDED_AT, '"', ''))) AS TRIP_DURATION_SECONDS
+distinct
+START_STATIO_ID as station_id,
+start_station_name as station_name,
+START_LAT as station_lat,
+START_LNG as start_station_lng
 
-from {{ source('demo', 'bike') }}
+from {{ source('demo','bike') }}
 
 where RIDE_ID != 'ride_id'
 
@@ -17,4 +15,4 @@ where RIDE_ID != 'ride_id'
 
 select
 *
-from TRIPS
+from BIKE
